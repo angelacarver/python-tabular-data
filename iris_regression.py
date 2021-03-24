@@ -26,28 +26,34 @@ def regress_and_plot(species):
             data in iris.csv which pertain to the species entered or None if the species 
             entered is not in iris.csv.
     """
+    #read in iris.csv and select desired species
     dataframe = pd.read_csv("iris.csv")
     dataframespecies = dataframe[dataframe.species == species]
+    #check that the species is in iris.csv
     if len(dataframespecies.columns) == 0:
         print('Species not in iris.csv.')
     else:
+        #select variables petal lengtha and sepal length
         x = dataframespecies.petal_length_cm
         y = dataframespecies.sepal_length_cm
+        #perform linear regression
         regression = stats.linregress(x, y)
         slope = regression.slope
         intercept = regression.intercept
+        #plot the points and the regressed line, save plot as .png
         plt.scatter(x, y, label = 'Data')
         plt.plot(x, slope * x + intercept, color = "orange", label = 'Fitted line')
         plt.xlabel("Petal length (cm)")
         plt.ylabel("Sepal length (cm)")
         plt.legend()
-        plt.savefig("petal_v_sepal_length_regress.png")
+        plt.savefig("petal_v_sepal_length_regression.png")
+        quit()
+        #prepare variables to be returned
         intstr = 'intercept:'
         slpstr = 'slope:'
-        return [intstr, intercept, slpstr, slope]
-        print('Regression saved as petal_v_sepal_length_regress.png.')
-    #if dataframespecies isn't empty
-    #return slope, intercept, plot
+    #return [intstr, intercept, slpstr, slope]
+    print('Regression saved as petal_v_sepal_length_regression.png.')
+
 
 regress_and_plot("Iris_virginica")
 

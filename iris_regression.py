@@ -26,9 +26,9 @@ def regress_and_plot(species):
             data in iris.csv which pertain to the species entered or None if the species 
             entered is not in iris.csv.
     """
-    dataframe = read_csv("iris.csv")
+    dataframe = pd.read_csv("iris.csv")
     dataframespecies = dataframe[dataframe.species == species]
-    if dataframespecies == df.empty:
+    if len(dataframespecies.columns) == 0:
         print('Species not in iris.csv.')
     else:
         x = dataframespecies.petal_length_cm

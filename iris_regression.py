@@ -43,6 +43,10 @@ def regress_and_plot(species, plot_path = None):
     -------
     The plot is saved and nothing is returned.
     """
+    #if plot_path is not provided, use the gen_filename path to generate it
+    if not plot_path:
+        plot_path = gen_filename(species)
+
     #read in iris.csv and select desired species
     dataframe = pd.read_csv("iris.csv")
     dataframespecies = dataframe[dataframe.species == species]
@@ -66,14 +70,15 @@ def regress_and_plot(species, plot_path = None):
         plt.savefig(plot_path)
         quit()
 
-regress_and_plot("Iris_virginica")
+if __name__ == '__main__':
 
-#regress_and_plot("Iris_versicolor")
+    regress_and_plot("Iris_virginica")
 
-#regress_and_plot("Iris_setosa")
+    regress_and_plot("Iris_versicolor")
+
+    regress_and_plot("Iris_setosa")
 
 
-#if __name__ == '__main__':
-   # main_cli()
+
 
 
